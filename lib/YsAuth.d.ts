@@ -1,4 +1,4 @@
-import { User } from "./YsAuthAtom";
+import { User } from './YsAuthAtom';
 declare type AmplifyConfigProps = {
     region: string;
     userPoolId: string;

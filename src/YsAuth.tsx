@@ -1,12 +1,12 @@
-import { CognitoUser } from "@aws-amplify/auth"
-import Amplify, { Auth } from "aws-amplify"
-import { User } from "./YsAuthAtom"
+import { CognitoUser } from '@aws-amplify/auth';
+import Amplify, { Auth } from 'aws-amplify';
+import { User } from './YsAuthAtom';
 
 type AmplifyConfigProps = {
-  region: string
-  userPoolId: string
-  userPoolWebClientId: string
-}
+  region: string;
+  userPoolId: string;
+  userPoolWebClientId: string;
+};
 
 export const YsAuthAmpliftConfig = (props: AmplifyConfigProps) => {
   Amplify.configure({
@@ -14,30 +14,27 @@ export const YsAuthAmpliftConfig = (props: AmplifyConfigProps) => {
       region: props.region,
       userPoolId: props.userPoolId,
       userPoolWebClientId: props.userPoolWebClientId,
-      authenticationFlowType: "USER_PASSWORD_AUTH",
+      authenticationFlowType: 'USER_PASSWORD_AUTH',
     },
-  })
-}
+  });
+};
 
-export const login = async (
-  username: string,
-  password: string
-): Promise<User> => {
+export const login = async (username: string, password: string): Promise<User> => {
   try {
-    const user = (await Auth.signIn(username, password)) as CognitoUser
+    const user = (await Auth.signIn(username, password)) as CognitoUser;
     return {
       username: user.getUsername(),
       token: user.getSignInUserSession()!.getIdToken().getJwtToken(),
-    }
+    };
   } catch (error: any) {
-    throw error
+    throw error;
   }
-}
+};
 
 export const logout = async () => {
   try {
-    await Auth.signOut()
+    await Auth.signOut();
   } catch (error: any) {
-    throw error
+    throw error;
   }
-}
+};
