@@ -1,6 +1,6 @@
-# ysauth v1.0.5
+# ysauth v1.0.6
 
-this library is an helper to aws amplify authantiaction
+This library is helper to aws amplify authantiaction with react
 
 ## How To Use
 
