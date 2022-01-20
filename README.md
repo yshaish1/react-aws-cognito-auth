@@ -1,4 +1,4 @@
-# ysauth v1.0.6
+# ysauth v1.0.7
 
 This library is helper to aws amplify authantiaction with react
 

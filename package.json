@@ -1,6 +1,6 @@
 {
   "name": "ysauth",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This is an Amplify Auth helper",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
