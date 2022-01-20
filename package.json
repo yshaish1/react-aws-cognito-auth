@@ -1,0 +1,30 @@
+{
+  "name": "ysauth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^17.0.38",
+    "prettier": "^2.5.1",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "@aws-amplify/auth": "^4.3.20",
+    "aws-amplify": "^4.3.12",
+    "react": "^17.0.2",
+    "recoil": "^0.5.2"
+  }
+}
