@@ -1,4 +1,4 @@
-# ysauth v1.0.4
+# ysauth v1.0.5
 
 this library is an helper to aws amplify authantiaction
 
@@ -59,8 +59,9 @@ import { useAuth } from "ysauth"
 ```
 const auth = useAuth()
 
-auth.user          --> user details
+auth.loading       --> until get user is logged in or not
 auth.user.loggedIn --> to check if user is logged in
-auth.login()       --> login function
+auth.user          --> user details
+auth.login()       --> login function (await auth.login(username, password))
 auth.logout()      --> logout function
 ```
