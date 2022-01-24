@@ -12,6 +12,7 @@ export const AuthContext = createContext(null as any);
 export type UseAuthProps = {
   login: (username: string, password: string) => any;
   logout: () => any;
+  resetPassword: (username: string, code: string, password: string) => any;
   getCurrentUser: () => User;
   error: string;
   loading: boolean;
@@ -76,12 +77,24 @@ export const YsAuthProvider = ({ children }: any) => {
     }
   };
 
+  const resetPassword = async (username: string, code: string, password: string) => {
+    setLoading(true);
+    try {
+      await YsAuth.resetPassword(username, code, password);
+      setLoading(false);
+      setError(null);
+    } catch (error: any) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
+
   const getCurrentUser = (): User => {
     return { username: authState.username, token: authState.token };
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, getCurrentUser, error, loading, user: authState }}>
+    <AuthContext.Provider value={{ login, logout, resetPassword, getCurrentUser, error, loading, user: authState }}>
       {children}
     </AuthContext.Provider>
   );
