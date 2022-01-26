@@ -1,7 +1,10 @@
 {
   "name": "ysauth",
-  "version": "1.0.8",
-  "description": "This is an Amplify Auth helper",
+  "version": "1.1.6",
+  "description": "AWS Cognito React Authentication",
+  "repository": "https://github.com/yshaish1/ysauth",
+  "license": "MIT",
+  "author": "Yossi Shaish (Mittinga)",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -21,10 +24,12 @@
   "keywords": [
     "amplify",
     "auth",
-    "recoil auth"
+    "cognito",
+    "aws authentication",
+    "user pool",
+    "authentication",
+    "react auth"
   ],
-  "author": "Yossi Shaish",
-  "license": "ISC",
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@types/react": "^17.0.38",

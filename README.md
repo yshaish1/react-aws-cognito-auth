@@ -1,6 +1,6 @@
-# ysauth v1.0.7
+# YsAuth Amplify (AWS Cognito User Pool) Authentication
 
-This library is helper to aws amplify authantiaction with react
+This library is helper to aws amplify (with Cognito user pool) authentication with react
 
 ## How To Use
 
@@ -12,13 +12,13 @@ On top of your app need to add <b>YsAuth Provider</b> as describe below
 
 First of all you need to import provider
 
-```
-import { YsAuthProvider } from "ysauth"
+```javascript
+import { YsAuthProvider } from 'ysauth';
 ```
 
 Then impliment like this (for example)
 
-```
+```javascript
 <YsAuthProvider>
   <React.StrictMode>
     <App />
@@ -30,18 +30,18 @@ Then impliment like this (for example)
 
 ### Configure Amplify
 
-```
-import { YsAuthAmpliftConfig } from "ysauth"
+```javascript
+import { YsAuthAmpliftConfig } from 'ysauth';
 ```
 
 And the configuration itself
 
-```
+```javascript
 YsAuthAmpliftConfig({
-  region: process.env.REACT_APP_COGNITO_REGION!,
-  userPoolId: process.env.REACT_APP_COGNITO_POOL_ID!,
-  userPoolWebClientId: process.env.REACT_APP_COGNITO_CLIENT_ID!,
-})
+  region: '###',
+  userPoolId: '###',
+  userPoolWebClientId: '###',
+});
 ```
 
 ---
@@ -50,18 +50,18 @@ YsAuthAmpliftConfig({
 
 Now you can call <b>usAuth</b> wherever you want to use.
 
-```
-import { useAuth } from "ysauth"
+```javascript
+import { useAuth } from 'ysauth';
 ```
 
 ## Uses
 
-```
-const auth = useAuth()
+```javascript
+const auth = useAuth();
 
-auth.loading       --> until get user is logged in or not
-auth.user.loggedIn --> to check if user is logged in
-auth.user          --> user details
-auth.login()       --> login function (await auth.login(username, password))
-auth.logout()      --> logout function
+auth.loading;
+auth.getCurrentUser();
+auth.login('username', 'password');
+auth.logout();
+auth.resetPassword('username', 'password', 'resetCode');
 ```

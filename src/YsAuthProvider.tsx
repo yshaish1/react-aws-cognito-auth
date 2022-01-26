@@ -6,6 +6,7 @@ import { Auth } from 'aws-amplify';
 import { createContext, useContext, useEffect, useState } from 'react';
 import * as YsAuth from './YsAuth';
 import { AuthProps, useAuthState, User } from './YsAuthAtom';
+import { RecoilRoot } from 'recoil';
 
 export const AuthContext = createContext(null as any);
 
@@ -25,7 +26,7 @@ export function useAuth(): UseAuthProps {
   return value;
 }
 
-export const YsAuthProvider = ({ children }: any) => {
+const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const [authState, setAuthState] = useAuthState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -38,6 +39,7 @@ export const YsAuthProvider = ({ children }: any) => {
           username: user.getUsername(),
           loggedIn: true,
           token: user.getSignInUserSession()!.getIdToken().getJwtToken(),
+          expire: user.getSignInUserSession()!.getIdToken().getExpiration(),
         });
         setLoading(false);
       } catch (error) {
@@ -69,6 +71,7 @@ export const YsAuthProvider = ({ children }: any) => {
         loggedIn: false,
         username: null,
         token: null,
+        expire: null,
       });
       setLoading(false);
     } catch (error: any) {
@@ -90,12 +93,20 @@ export const YsAuthProvider = ({ children }: any) => {
   };
 
   const getCurrentUser = (): User => {
-    return { username: authState.username, token: authState.token };
+    return { username: authState.username, token: authState.token, expire: authState.expire };
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, resetPassword, getCurrentUser, error, loading, user: authState }}>
+    <AuthContext.Provider value={{ login, logout, resetPassword, getCurrentUser, error, loading }}>
       {children}
     </AuthContext.Provider>
+  );
+};
+
+export const YsAuthProvider = ({ children }: JSX.ElementChildrenAttribute) => {
+  return (
+    <RecoilRoot>
+      <YsProvider>{children}</YsProvider>
+    </RecoilRoot>
   );
 };

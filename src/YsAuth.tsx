@@ -25,6 +25,7 @@ export const login = async (username: string, password: string): Promise<User> =
     return {
       username: user.getUsername(),
       token: user.getSignInUserSession()!.getIdToken().getJwtToken(),
+      expire: user.getSignInUserSession()!.getIdToken().getExpiration(),
     };
   } catch (error: any) {
     throw error;

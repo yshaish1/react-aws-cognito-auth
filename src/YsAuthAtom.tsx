@@ -8,12 +8,14 @@ export interface AuthProps extends User {
 export type User = {
   username: string | null;
   token: string | null;
+  expire: number | null;
 };
 
 const defaultState: AuthProps = {
   loggedIn: false,
   username: null,
   token: null,
+  expire: null,
   loading: false,
 };
 
