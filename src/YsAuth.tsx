@@ -29,7 +29,6 @@ export const signup = async (email: string, username: string, password: string):
         email,
       },
     });
-    console.log(response);
     return response;
   } catch (error: any) {
     throw error;
@@ -39,7 +38,6 @@ export const signup = async (email: string, username: string, password: string):
 export const confirmSignup = async (username: string, code: string): Promise<any> => {
   try {
     const response = await Auth.confirmSignUp(username, code);
-    console.log(response);
     return response;
   } catch (error: any) {
     throw error;
