@@ -1,5 +1,6 @@
 import { CognitoUser } from '@aws-amplify/auth';
 import Amplify, { Auth } from 'aws-amplify';
+import { ISignUpResult } from 'amazon-cognito-identity-js';
 import { User } from './YsAuthAtom';
 
 type AmplifyConfigProps = {
@@ -17,6 +18,32 @@ export const YsAuthAmpliftConfig = (props: AmplifyConfigProps) => {
       authenticationFlowType: 'USER_PASSWORD_AUTH',
     },
   });
+};
+
+export const signup = async (email: string, username: string, password: string): Promise<ISignUpResult> => {
+  try {
+    const response = await Auth.signUp({
+      username,
+      password,
+      attributes: {
+        email,
+      },
+    });
+    console.log(response);
+    return response;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const confirmSignup = async (username: string, code: string): Promise<any> => {
+  try {
+    const response = await Auth.confirmSignUp(username, code);
+    console.log(response);
+    return response;
+  } catch (error: any) {
+    throw error;
+  }
 };
 
 export const login = async (username: string, password: string): Promise<User> => {

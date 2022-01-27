@@ -5,7 +5,7 @@ export declare type UseAuthProps = {
     login: (username: string, password: string) => any;
     logout: () => any;
     resetPassword: (username: string, code: string, password: string) => any;
-    getCurrentUser: () => User;
+    getCurrentUser: () => User | null;
     error: string;
     loading: boolean;
     user: AuthProps;

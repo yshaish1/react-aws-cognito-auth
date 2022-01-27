@@ -2,6 +2,7 @@ import React from 'react';
 
 import { CognitoUser } from '@aws-amplify/auth';
 import { Auth } from 'aws-amplify';
+import { ISignUpResult } from 'amazon-cognito-identity-js';
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import * as YsAuth from './YsAuth';
@@ -11,8 +12,10 @@ import { RecoilRoot } from 'recoil';
 export const AuthContext = createContext(null as any);
 
 export type UseAuthProps = {
-  login: (username: string, password: string) => any;
+  login: (username: string, password: string) => Promise<User>;
   logout: () => any;
+  signup: (email: string, username: string, password: string) => Promise<ISignUpResult>;
+  confirmSignup: (username: string, code: string) => Promise<any>;
   resetPassword: (username: string, code: string, password: string) => any;
   getCurrentUser: () => User | null;
   error: string;
@@ -49,6 +52,30 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
 
     unsub();
   }, [setAuthState]);
+
+  const signup = async (email: string, username: string, password: string) => {
+    setLoading(true);
+    try {
+      const user = await YsAuth.signup(email, username, password);
+      setLoading(false);
+      setError(null);
+    } catch (error: any) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
+
+  const confirmSignup = async (username: string, code: string) => {
+    setLoading(true);
+    try {
+      const user = await YsAuth.confirmSignup(username, code);
+      setLoading(false);
+      setError(null);
+    } catch (error: any) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
 
   const login = async (username: string, password: string) => {
     setLoading(true);
@@ -94,11 +121,26 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
 
   const getCurrentUser = (): User | null => {
     if (!authState.username) return null;
-    return { username: authState.username, token: authState.token, expire: authState.expire };
+    return {
+      username: authState.username,
+      token: authState.token,
+      expire: authState.expire,
+    };
   };
 
   return (
-    <AuthContext.Provider value={{ login, logout, resetPassword, getCurrentUser, error, loading }}>
+    <AuthContext.Provider
+      value={{
+        login,
+        logout,
+        signup,
+        confirmSignup,
+        resetPassword,
+        getCurrentUser,
+        error,
+        loading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

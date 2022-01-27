@@ -6,6 +6,12 @@ This library is helper to aws amplify (with Cognito user pool) authentication wi
 
 ---
 
+first of all you need to create user pool on aws cognito
+
+https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-as-user-directory.html
+
+---
+
 ### Provider
 
 On top of your app need to add <b>YsAuth Provider</b> as describe below
@@ -48,7 +54,7 @@ YsAuthAmpliftConfig({
 
 # That's It! 🚀
 
-Now you can call <b>usAuth</b> wherever you want to use.
+Now you can call <b>useAuth</b> wherever you want to use.
 
 ```javascript
 import { useAuth } from 'ysauth';
@@ -62,6 +68,8 @@ const auth = useAuth();
 auth.loading;
 auth.getCurrentUser();
 auth.login('username', 'password');
+auth.signup('email', 'username', 'password');
+auth.confirmSignup('username', 'code');
 auth.logout();
 auth.resetPassword('username', 'password', 'resetCode');
 ```
