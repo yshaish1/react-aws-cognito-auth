@@ -14,7 +14,7 @@ export type UseAuthProps = {
   login: (username: string, password: string) => any;
   logout: () => any;
   resetPassword: (username: string, code: string, password: string) => any;
-  getCurrentUser: () => User;
+  getCurrentUser: () => User | null;
   error: string;
   loading: boolean;
   user: AuthProps;
@@ -92,7 +92,8 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
     }
   };
 
-  const getCurrentUser = (): User => {
+  const getCurrentUser = (): User | null => {
+    if (!authState.username) return null;
     return { username: authState.username, token: authState.token, expire: authState.expire };
   };
 
