@@ -47,6 +47,7 @@ YsAuthAmpliftConfig({
   region: '###',
   userPoolId: '###',
   userPoolWebClientId: '###',
+  idleTime?: 10000 // time in milliseconds. default = 3600000 (1 hour)
 });
 ```
 
@@ -81,6 +82,7 @@ if (auth.idle) {
 const auth = useAuth();
 
 auth.loading;
+auth.idle;
 auth.getCurrentUser();
 auth.login('username', 'password');
 auth.signup('email', 'username', 'password');

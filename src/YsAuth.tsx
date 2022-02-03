@@ -7,6 +7,17 @@ type AmplifyConfigProps = {
   region: string;
   userPoolId: string;
   userPoolWebClientId: string;
+  idleTime?: number;
+};
+const DEFAULT_IDLE_TIME = 3600000;
+let IdleTimeConfigure = DEFAULT_IDLE_TIME;
+
+const setIdleTimeConfigure = (idleTime: number) => {
+  IdleTimeConfigure = idleTime;
+};
+
+export const getIdleTimeConfigure = () => {
+  return IdleTimeConfigure;
 };
 
 export const YsAuthAmpliftConfig = (props: AmplifyConfigProps) => {
@@ -18,6 +29,8 @@ export const YsAuthAmpliftConfig = (props: AmplifyConfigProps) => {
       authenticationFlowType: 'USER_PASSWORD_AUTH',
     },
   });
+
+  setIdleTimeConfigure(props.idleTime ? props.idleTime : DEFAULT_IDLE_TIME);
 };
 
 export const signup = async (email: string, username: string, password: string): Promise<ISignUpResult> => {

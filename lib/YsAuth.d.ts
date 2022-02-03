@@ -4,7 +4,9 @@ declare type AmplifyConfigProps = {
     region: string;
     userPoolId: string;
     userPoolWebClientId: string;
+    idleTime?: number;
 };
+export declare const getIdleTimeConfigure: () => number;
 export declare const YsAuthAmpliftConfig: (props: AmplifyConfigProps) => void;
 export declare const signup: (email: string, username: string, password: string) => Promise<ISignUpResult>;
 export declare const confirmSignup: (username: string, code: string) => Promise<any>;

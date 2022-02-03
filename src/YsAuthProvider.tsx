@@ -38,7 +38,7 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const [idle, setIdle] = useState(false);
 
   useIdleTimer({
-    timeout: 3600000, // 1 hour
+    timeout: YsAuth.getIdleTimeConfigure(), // 1 hour
     onIdle: () => setIdle(true),
     debounce: 500,
   });
