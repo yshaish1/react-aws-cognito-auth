@@ -1,3 +1,3 @@
 export { YsAuthAmpliftConfig, login, logout } from './YsAuth';
-export { User } from './YsAuthAtom';
+export type { User } from './YsAuthAtom';
 export { YsAuthProvider, useAuth } from './YsAuthProvider';

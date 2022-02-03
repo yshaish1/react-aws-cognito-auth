@@ -1,6 +1,6 @@
 {
   "name": "ysauth",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "AWS Cognito React Authentication",
   "repository": "https://github.com/yshaish1/ysauth",
   "license": "MIT",
