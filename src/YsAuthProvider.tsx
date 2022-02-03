@@ -8,6 +8,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import * as YsAuth from './YsAuth';
 import { AuthProps, useAuthState, User } from './YsAuthAtom';
 import { RecoilRoot } from 'recoil';
+import { useIdleTimer } from 'react-idle-timer';
 
 export const AuthContext = createContext(null as any);
 
@@ -20,19 +21,27 @@ export type UseAuthProps = {
   getCurrentUser: () => User | null;
   error: string;
   loading: boolean;
+  idle: boolean;
   user: AuthProps;
 };
 
-export function useAuth(): UseAuthProps {
+export const useAuth = (): UseAuthProps => {
   const value = useContext(AuthContext);
 
   return value;
-}
+};
 
 const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const [authState, setAuthState] = useAuthState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [idle, setIdle] = useState(false);
+
+  useIdleTimer({
+    timeout: 3600000, // 1 hour
+    onIdle: () => setIdle(true),
+    debounce: 500,
+  });
 
   useEffect(() => {
     const unsub = async () => {
@@ -56,7 +65,7 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const signup = async (email: string, username: string, password: string) => {
     setLoading(true);
     try {
-      const user = await YsAuth.signup(email, username, password);
+      await YsAuth.signup(email, username, password);
       setLoading(false);
       setError(null);
     } catch (error: any) {
@@ -68,7 +77,7 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const confirmSignup = async (username: string, code: string) => {
     setLoading(true);
     try {
-      const user = await YsAuth.confirmSignup(username, code);
+      await YsAuth.confirmSignup(username, code);
       setLoading(false);
       setError(null);
     } catch (error: any) {
@@ -139,6 +148,7 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
         getCurrentUser,
         error,
         loading,
+        idle,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 {
   "name": "ysauth",
-  "version": "1.1.8",
+  "version": "2.0.0",
   "description": "AWS Cognito React Authentication",
   "repository": "https://github.com/yshaish1/ysauth",
   "license": "MIT",
@@ -44,6 +44,7 @@
     "@aws-amplify/auth": "^4.3.20",
     "aws-amplify": "^4.3.12",
     "react": "^17.0.2",
+    "react-idle-timer": "^4.6.4",
     "recoil": "^0.5.2"
   }
 }
