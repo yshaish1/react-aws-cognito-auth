@@ -62,6 +62,21 @@ import { useAuth } from 'ysauth';
 
 ## Uses
 
+### 🔴 2.0 news
+
+now you can get idle time out.
+by default JWT token of cognito user is 1 hour.
+
+if the user is idle for 1 hour so <b>auth.idle</b> will be <b>true</b>
+
+you can check if idle and the token is out of date.
+
+```javascript
+if (auth.idle) {
+  // do somthing... like popup to reload page
+}
+```
+
 ```javascript
 const auth = useAuth();
 

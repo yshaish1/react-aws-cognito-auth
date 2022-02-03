@@ -11,7 +11,8 @@ export declare type UseAuthProps = {
     getCurrentUser: () => User | null;
     error: string;
     loading: boolean;
+    idle: boolean;
     user: AuthProps;
 };
-export declare function useAuth(): UseAuthProps;
+export declare const useAuth: () => UseAuthProps;
 export declare const YsAuthProvider: ({ children }: JSX.ElementChildrenAttribute) => JSX.Element;
