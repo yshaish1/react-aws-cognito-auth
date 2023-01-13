@@ -1,3 +1,3 @@
-export { YsAuthAmpliftConfig, login, logout } from './YsAuth';
-export type { User } from './YsAuthAtom';
-export { YsAuthProvider, useAuth } from './YsAuthProvider';
+export { ReactCognitoAuthConfig, login, logout } from './react-cognito-auth';
+export type { User } from './react-cognito-auth-atom';
+export { ReactCognitoAuthProvider, useAuth } from './react-cognito-auth-provider';

@@ -5,8 +5,8 @@ import { Auth } from 'aws-amplify';
 import { ISignUpResult } from 'amazon-cognito-identity-js';
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import * as YsAuth from './YsAuth';
-import { AuthProps, useAuthState, User } from './YsAuthAtom';
+import * as ReactCognitoAuth from './react-cognito-auth';
+import { AuthProps, useAuthState, User } from './react-cognito-auth-atom';
 import { RecoilRoot } from 'recoil';
 import { useIdleTimer } from 'react-idle-timer';
 
@@ -31,14 +31,14 @@ export const useAuth = (): UseAuthProps => {
   return value;
 };
 
-const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
+const AuthProvider = ({ children }: any) => {
   const [authState, setAuthState] = useAuthState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [idle, setIdle] = useState(false);
 
   useIdleTimer({
-    timeout: YsAuth.getIdleTimeConfigure(), // 1 hour
+    timeout: ReactCognitoAuth.getIdleTimeConfigure(), // 1 hour
     onIdle: () => setIdle(true),
     debounce: 500,
   });
@@ -65,7 +65,7 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const signup = async (email: string, username: string, password: string) => {
     setLoading(true);
     try {
-      await YsAuth.signup(email, username, password);
+      await ReactCognitoAuth.signup(email, username, password);
       setLoading(false);
       setError(null);
     } catch (error: any) {
@@ -77,7 +77,7 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const confirmSignup = async (username: string, code: string) => {
     setLoading(true);
     try {
-      await YsAuth.confirmSignup(username, code);
+      await ReactCognitoAuth.confirmSignup(username, code);
       setLoading(false);
       setError(null);
     } catch (error: any) {
@@ -89,7 +89,7 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const login = async (username: string, password: string) => {
     setLoading(true);
     try {
-      const user = await YsAuth.login(username, password);
+      const user = await ReactCognitoAuth.login(username, password);
       setAuthState({ ...user, loggedIn: true });
       setLoading(false);
       setError(null);
@@ -102,7 +102,7 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const logout = async () => {
     setLoading(true);
     try {
-      await YsAuth.logout();
+      await ReactCognitoAuth.logout();
       setAuthState({
         loggedIn: false,
         username: null,
@@ -119,7 +119,7 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   const resetPassword = async (username: string, code: string, password: string) => {
     setLoading(true);
     try {
-      await YsAuth.resetPassword(username, code, password);
+      await ReactCognitoAuth.resetPassword(username, code, password);
       setLoading(false);
       setError(null);
     } catch (error: any) {
@@ -156,10 +156,10 @@ const YsProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   );
 };
 
-export const YsAuthProvider = ({ children }: JSX.ElementChildrenAttribute) => {
+export const ReactCognitoAuthProvider = ({ children }: JSX.ElementChildrenAttribute) => {
   return (
     <RecoilRoot>
-      <YsProvider>{children}</YsProvider>
+      <AuthProvider>{children}</AuthProvider>
     </RecoilRoot>
   );
 };

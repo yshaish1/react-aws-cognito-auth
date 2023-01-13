@@ -1,7 +1,7 @@
 import { CognitoUser } from '@aws-amplify/auth';
-import Amplify, { Auth } from 'aws-amplify';
+import { Auth, Amplify } from 'aws-amplify';
 import { ISignUpResult } from 'amazon-cognito-identity-js';
-import { User } from './YsAuthAtom';
+import { User } from './react-cognito-auth-atom';
 
 type AmplifyConfigProps = {
   region: string;
@@ -20,7 +20,7 @@ export const getIdleTimeConfigure = () => {
   return IdleTimeConfigure;
 };
 
-export const YsAuthAmpliftConfig = (props: AmplifyConfigProps) => {
+export const ReactCognitoAuthConfig = (props: AmplifyConfigProps) => {
   Amplify.configure({
     Auth: {
       region: props.region,
