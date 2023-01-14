@@ -1,6 +1,6 @@
 {
   "name": "react-aws-cognito-auth",
-  "version": "2.0.1",
+  "version": "2.0.2s",
   "description": "AWS Cognito React Authentication",
   "repository": {
     "type": "git",

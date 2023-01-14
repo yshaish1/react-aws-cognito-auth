@@ -137,6 +137,14 @@ const AuthProvider = ({ children }: any) => {
     };
   };
 
+  const isLoading = () => {
+    return loading
+  }
+
+  const isIdle = () => {
+    return idle
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -146,9 +154,9 @@ const AuthProvider = ({ children }: any) => {
         confirmSignup,
         resetPassword,
         getCurrentUser,
+        isLoading,
+        isIdle,
         error,
-        loading,
-        idle,
       }}
     >
       {children}

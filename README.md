@@ -94,7 +94,7 @@ if the user is idle for 1 hour so <b>auth.idle</b> will be <b>true</b>
 you can check if idle and the token is out of date.
 
 ```javascript
-if (auth.idle) {
+if (auth.isIdle()) {
   // do somthing... like popup to reload page
 }
 ```
@@ -102,8 +102,8 @@ if (auth.idle) {
 ```javascript
 const auth = useAuth();
 
-auth.loading;
-auth.idle;
+auth.isLoading();
+auth.isIdle();
 auth.getCurrentUser();
 auth.login('username', 'password');
 auth.signup('email', 'username', 'password');
