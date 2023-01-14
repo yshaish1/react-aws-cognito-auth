@@ -1,10 +1,31 @@
-# react-aws-cognito-auth (AWS Cognito User Pool) Authentication
+<h1 align="center">
+   <b>
+        <a href="https://github.com/yshaish1/react-aws-cognito-auth">React AWS Cognito Auth</a><br>
+    </b>
+</h1>
 
+<p align="center">React authentication wrapper for AWS Cognito User Pool</p>
+
+<p align="center">
+    <a href="https://github.com/yshaish1/react-cognito-auth"><b>Github</b></a> •
+    <a href="https://www.npmjs.com/package/react-aws-cognito-auth"><b>npm</b></a>
+</p>
+
+<div align="center">
+
+[![npm version](https://img.shields.io/npm/v/react-aws-cognito-auth.svg?style=flat-square)](https://www.npmjs.com/package/react-aws-cognito-auth)
+[![npm downloads](https://img.shields.io/npm/dm/react-aws-cognito-auth.svg?style=flat-square)](https://npm-stat.com/charts.html?package=react-aws-cognito-auth)
+[![Known Vulnerabilities](https://snyk.io/test/npm/react-aws-cognito-auth/badge.svg)](https://snyk.io/test/npm/react-aws-cognito-auth)
+
+</div>
+
+<div align="center">
 This library is helper to aws amplify (with Cognito user pool) authentication with react
-
-## How To Use
+</div>
 
 ---
+
+### How To Use
 
 first of all you need to create user pool on aws cognito
 
