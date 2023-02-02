@@ -20,8 +20,8 @@ export type UseAuthProps = {
   resetPassword: (username: string, code: string, password: string) => any;
   getCurrentUser: () => User | null;
   error: string;
-  loading: boolean;
-  idle: boolean;
+  isLoading: () => boolean;
+  isIdle: () => boolean;
   user: AuthProps;
 };
 
